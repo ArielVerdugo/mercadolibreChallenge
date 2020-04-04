@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutConData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutPadre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/groupView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/layoutPadre"
+                app:layout_constraintTop_toTopOf="@+id/layoutPadre">
+
+                <include
+                    android:id="@+id/header_detalle"
+                    layout="@layout/header_activity_detalle"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    app:layout_constraintBottom_toTopOf="@+id/rvPhotos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/header_detalle"
+                    app:layout_constraintStart_toStartOf="@+id/header_detalle"
+                    app:layout_constraintTop_toBottomOf="@+id/header_detalle"  />
+
+                <TextView
+                    android:id="@+id/titleProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textSize="23dp"
+                    android:gravity="center"
+                    android:text="Titulo"
+                    app:layout_constraintEnd_toEndOf="@+id/rvPhotos"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/rvPhotos"
+                    app:layout_constraintTop_toBottomOf="@+id/rvPhotos" />
+
+                <TextView
+                    android:id="@+id/priceProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:text="ENVIO"
+                    app:layout_constraintEnd_toEndOf="@+id/titleProducto"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/titleProducto"
+                    app:layout_constraintTop_toBottomOf="@+id/titleProducto" />
+
+                <TextView
+                    android:id="@+id/attributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_details"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    app:layout_constraintEnd_toEndOf="@+id/priceProducto"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/priceProducto"
+                    app:layout_constraintTop_toBottomOf="@+id/priceProducto"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintEnd_toEndOf="@+id/attributes"
+                    app:layout_constraintStart_toStartOf="@+id/attributes"
+                    app:layout_constraintTop_toBottomOf="@+id/attributes"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

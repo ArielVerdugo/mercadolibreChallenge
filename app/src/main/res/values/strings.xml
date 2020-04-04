@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MercadolibreChallenge</string>
+
+    <!-->TEXTOS HEADER<-->
+    <string name="find_hint">Buscar en Mercado Libre</string>
+    <string name="deliver_to">Enviar a Ariel Verdugo - Teodoro garcia 2224</string>
+
+
+    <!-->TEXTOS PARA ERROR<-->
+    <string name="error_service">En éste momento la aplicación no está disponible</string>
+    <string name="error_conection">Parece que no hay internet</string>
+    <string name="error_empty">No se encontraron datos para la búsqueda deseada</string>
+
+    <!-->TEXTOS PARA BOTONES<-->
+    <string name="button_reload">Reintentrar</string>
+
+
+    <!-->TEXTOS PARA XML DETALLE<-->
+    <string name="product_details">Detalle del producto</string>
+
+    <!-->TEXTOS PARA XML VIEW ATRIBUTOS DETALLE<-->
+    <string name="no_value">No se encontró descripción</string>
+
+</resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_inferior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/linkToHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/imgHome"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/search" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linkToLiquid"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+
+        <ImageView
+            android:id="@+id/imgLiquidaciones"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/favorite" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linkToTrans"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/imgTrans"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/store" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linkToContra"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/imgContra"
+            style="@style/menuSelectImg"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/notification" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/jjjj"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/imgJjjj"
+            style="@style/menuSelectImg"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/user" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
