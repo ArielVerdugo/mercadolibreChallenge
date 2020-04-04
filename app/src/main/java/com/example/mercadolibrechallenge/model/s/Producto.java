@@ -30,7 +30,7 @@ public class Producto {
 
     @SerializedName("shipping")
     @Expose
-    private Envio shiping;
+    private Envio shipping;
 
     @SerializedName("available_quantity")
     @Expose
@@ -83,11 +83,11 @@ public class Producto {
     }
 
     public Envio getShiping() {
-        return shiping;
+        return shipping;
     }
 
     public void setShiping(Envio shiping) {
-        this.shiping = shiping;
+        this.shipping = shiping;
     }
 
     public Integer getCantidadDisponible() {
