@@ -11,15 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.model.s.Producto;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<ProductosRecyclerViewAdapter.ProductoViewHolder>{

@@ -54,6 +54,7 @@ public class BusquedaActivity extends AppCompatActivity  implements SearchView.O
         search = myLayout.findViewById( R.id.buscar );
         search.setOnQueryTextListener(this);
 
+
         //TODO RECYCLER
         /*ArrayList<Integer> sampleImagesRecycler = new ArrayList<>();
         sampleImagesRecycler.add(R.drawable.heladera);
