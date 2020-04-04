@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.mercadolibrechallenge.R;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -31,7 +32,6 @@ public class BaseFunctions {
     public static void setPhotos(Context context,String img, ImageView view) {
         Glide.with(context)
                 .load(img)
-                .apply(new RequestOptions().override(200,200))
                 .into(view);
 
         //new ImageLoadTask(img,view).execute();
