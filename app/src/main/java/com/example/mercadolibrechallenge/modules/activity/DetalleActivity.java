@@ -122,6 +122,7 @@ public class DetalleActivity extends AppCompatActivity {
             }
         };
 
+
         DetalleServiceImplementation detalleServiceImplementation = new DetalleServiceImplementation();
         detalleServiceImplementation.getDetalle(idProducto).observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
