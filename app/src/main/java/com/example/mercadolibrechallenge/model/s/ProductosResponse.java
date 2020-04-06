@@ -19,4 +19,8 @@ public class ProductosResponse {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
+
+    public ProductosResponse(List<Producto> productos) {
+        this.productos = productos;
+    }
 }

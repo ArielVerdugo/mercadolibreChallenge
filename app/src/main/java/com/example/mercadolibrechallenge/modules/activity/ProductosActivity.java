@@ -37,9 +37,9 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private View layoutErrorServicio;
     private View layoutSinDatos;
 
-    private List<Producto> productos;
+    public List<Producto> productos;
 
-    private RecyclerView rvProductos;
+    public RecyclerView rvProductos;
     private ProductosRecyclerViewAdapter adapterProducto;
     private SearchView productoBusqueda;
 
@@ -78,7 +78,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
     }
 
-    private void invokeBusquedaService(final String producto){
+    public void invokeBusquedaService(final String producto){
         GetBaseCallback callback = new GetBaseCallback<ProductosResponse>() {
             @Override
             public void success(ProductosResponse response) {

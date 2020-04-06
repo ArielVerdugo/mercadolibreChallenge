@@ -105,4 +105,14 @@ public class Producto {
         this.cantidadVendida = cantidadVendida;
     }
 
+    public Producto(String id, Double precio, String condicion, String imagen, String titulo, Envio shipping, Integer cantidadDisponible, Integer cantidadVendida) {
+        this.id = id;
+        this.precio = precio;
+        this.condicion = condicion;
+        this.imagen = imagen;
+        this.titulo = titulo;
+        this.shipping = shipping;
+        this.cantidadDisponible = cantidadDisponible;
+        this.cantidadVendida = cantidadVendida;
+    }
 }
