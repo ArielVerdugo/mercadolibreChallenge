@@ -83,7 +83,7 @@ public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<Productos
             }
         });
 
-        /*Glide.with((Activity) context)
+        /*.with((Activity) context)
                 .load(productos.get(position).getImagen())
                 .apply(new RequestOptions().override(100,100))
                 .into(holder.imageView);

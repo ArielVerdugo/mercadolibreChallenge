@@ -9,7 +9,7 @@ public class ProductosResponse {
 
     @SerializedName("results")
     @Expose
-    private List<Producto>productos;
+    private List<Producto> productos;
 
 
     public List<Producto> getProductos() {
@@ -23,4 +23,5 @@ public class ProductosResponse {
     public ProductosResponse(List<Producto> productos) {
         this.productos = productos;
     }
+
 }

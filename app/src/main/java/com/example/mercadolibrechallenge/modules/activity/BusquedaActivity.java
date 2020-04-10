@@ -21,7 +21,6 @@ import static com.example.mercadolibrechallenge.utils.Constants.FILTRO;
 public class BusquedaActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener{
 
     private CarouselView carouselView;
-    private int[] sampleImagesCarousel = {R.drawable.zapa8, R.drawable.zapa7, R.drawable.zapa2};
 
     private SearchView search;
 
@@ -39,17 +38,17 @@ public class BusquedaActivity extends AppCompatActivity  implements SearchView.O
 
     private void findComponents(){
 
-        carouselView = findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImagesCarousel.length);
+        //carouselView = findViewById(R.id.carouselView);
+        //carouselView.setPageCount(sampleImagesCarousel.length);
 
-        ImageListener imageListener = new ImageListener() {
+        /*ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(sampleImagesCarousel[position]);
+                //imageView.setImageResource(sampleImagesCarousel[position]);
             }
-        };
+        };*/
 
-        carouselView.setImageListener(imageListener);
+        //carouselView.setImageListener(imageListener);
         View myLayout = findViewById( R.id.header_busqueda);
         search = myLayout.findViewById( R.id.buscar );
         search.setOnQueryTextListener(this);

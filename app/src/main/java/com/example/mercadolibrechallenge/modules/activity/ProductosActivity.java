@@ -35,17 +35,17 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private String producto;
     private View layoutErrorInternet;
     private View layoutErrorServicio;
-    private View layoutSinDatos;
+    public View layoutSinDatos;
 
     public List<Producto> productos;
 
     public RecyclerView rvProductos;
-    private ProductosRecyclerViewAdapter adapterProducto;
+    public ProductosRecyclerViewAdapter adapterProducto;
     private SearchView productoBusqueda;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
 
