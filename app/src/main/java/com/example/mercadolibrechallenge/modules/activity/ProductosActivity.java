@@ -3,6 +3,7 @@ package com.example.mercadolibrechallenge.modules.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
 import com.example.mercadolibrechallenge.service.busqueda.BusquedaServiceImplementation;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
+import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
 import java.util.List;
 
@@ -39,9 +41,10 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
     private List<Producto> productos;
 
+    private ImageView backImage;
     private RecyclerView rvProductos;
     private ProductosRecyclerViewAdapter adapterProducto;
-    private SearchView productoBusqueda;
+
 
 
     @Override
@@ -70,11 +73,9 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         rvProductos.setLayoutManager(llmImagenes);
 
 
-        View myLayout = findViewById( R.id.header_busqueda);
-        productoBusqueda = myLayout.findViewById(R.id.buscar);
-        productoBusqueda.setQuery(producto,true);
-
-
+        View myLayout = findViewById( R.id.header_productos);
+        backImage = myLayout.findViewById(R.id.returnView);
+        BaseFunctions.backScreen(backImage,this);
 
     }
 
@@ -147,8 +148,6 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
     @Override
     public void onItemClick(int position) {
-        Intent detalleProduct = new Intent(this, DetalleActivity.class);
-        detalleProduct.putExtra(ID_PRODUCTO,productos.get(position).getId());
-        startActivity(detalleProduct);
+        BaseFunctions.redirectActivityWithString(this,DetalleActivity.class,ID_PRODUCTO,productos.get(position).getId());
     }
 }

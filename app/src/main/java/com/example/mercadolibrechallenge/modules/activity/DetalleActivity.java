@@ -13,15 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.model.s.Atributo;
 import com.example.mercadolibrechallenge.model.s.DetalleResponse;
-import com.example.mercadolibrechallenge.model.s.PhotoResponse;
-import com.example.mercadolibrechallenge.model.s.Producto;
 import com.example.mercadolibrechallenge.modules.adapter.AtributosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.adapter.PhotosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
 import com.example.mercadolibrechallenge.service.detalle.DetalleServiceImplementation;
+import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
 
 
@@ -50,6 +48,10 @@ public class DetalleActivity extends AppCompatActivity {
     private AtributosRecyclerViewAdapter atributosAdapter;
     private PhotosRecyclerViewAdapter photosAdapter;
 
+    private View layoutErrorInternet;
+    private View layoutErrorServicio;
+    private View layoutSinDatos;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,14 +79,20 @@ public class DetalleActivity extends AppCompatActivity {
         rvAtributos.setLayoutManager(linnearAtributos);
         rvPhotos.setLayoutManager(linnearPhotos);
 
+        layoutErrorInternet = findViewById(R.id.layoutErrorConeccion);
+        layoutErrorServicio = findViewById(R.id.layoutErrorServicio);
+        layoutSinDatos = findViewById(R.id.layoutSinDatos);
         View myLayout = findViewById( R.id.header_detalle);
+
         backImage = myLayout.findViewById(R.id.returnView);
-        backImage.setOnClickListener(new View.OnClickListener() {
+        BaseFunctions.backScreen(backImage,this);
+
+        /*backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DetalleActivity.super.onBackPressed();
             }
-        });
+        });*/
 
     }
 

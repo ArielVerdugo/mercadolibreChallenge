@@ -1,10 +1,15 @@
 package com.example.mercadolibrechallenge.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.mercadolibrechallenge.modules.activity.ProductosActivity;
 
+import static com.example.mercadolibrechallenge.utils.Constants.FILTRO;
 import static com.example.mercadolibrechallenge.utils.Constants.SHIPPING_COST;
 import static com.example.mercadolibrechallenge.utils.Constants.SHIPPING_FREE;
 
@@ -27,4 +32,20 @@ public class BaseFunctions {
                 .load(img)
                 .into(view);
     }
+
+    public static void redirectActivityWithString(Context context, Class clase,String key,String value){
+        Intent productosIntent = new Intent(context, clase);
+        productosIntent.putExtra(key, value);
+        context.startActivity(productosIntent);
+    }
+
+    public static void backScreen(View view,final Activity activity){
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
+    }
+
 }

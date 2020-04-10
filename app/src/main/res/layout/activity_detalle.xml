@@ -103,5 +103,12 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <include layout="@layout/error_sin_internet"
+        android:visibility="gone"/>
+    <include layout="@layout/error_producto_no_encontrado"
+        android:visibility="gone"/>
+    <include layout="@layout/error_servicio"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

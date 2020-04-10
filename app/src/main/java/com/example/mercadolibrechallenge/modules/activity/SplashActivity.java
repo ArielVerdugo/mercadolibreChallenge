@@ -7,9 +7,10 @@ import android.os.Handler;
 
 import com.example.mercadolibrechallenge.R;
 
+import static com.example.mercadolibrechallenge.utils.Constants.SPLASH_DISPLAY_LENGTH;
+
 public class SplashActivity extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
 
 
     @Override

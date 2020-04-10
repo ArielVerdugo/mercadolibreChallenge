@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.modules.adapter.BusquedaRecyclerViewAdapter;
+import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -72,9 +73,7 @@ public class BusquedaActivity extends AppCompatActivity  implements SearchView.O
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Intent productosIntent = new Intent(this, ProductosActivity.class);
-        productosIntent.putExtra(FILTRO, query);
-        startActivity(productosIntent);
+        BaseFunctions.redirectActivityWithString(this,ProductosActivity.class,FILTRO,query);
         return false;
     }
 
