@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private RecyclerView rvProductos;
     private ProductosRecyclerViewAdapter adapterProducto;
 
+    private TextView productHeader;
+
 
 
     @Override
@@ -52,12 +55,11 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
 
-        findComponents();
-
         Intent mIntent = getIntent();
         this.producto = mIntent.getStringExtra(FILTRO);
         invokeBusquedaService(producto);
 
+        findComponents();
 
     }
 
@@ -76,6 +78,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         View myLayout = findViewById( R.id.header_productos);
         backImage = myLayout.findViewById(R.id.returnView);
         BaseFunctions.backScreen(backImage,this);
+        productHeader = myLayout.findViewById(R.id.head_product);
+        productHeader.setText(producto);
 
     }
 

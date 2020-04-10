@@ -35,6 +35,7 @@ public class DetalleActivity extends AppCompatActivity {
     private ImageView backImage;
     private TextView productTitle;
     private TextView productPrice;
+    private TextView productHeader;
 
     private String idProducto;
 
@@ -86,13 +87,6 @@ public class DetalleActivity extends AppCompatActivity {
 
         backImage = myLayout.findViewById(R.id.returnView);
         BaseFunctions.backScreen(backImage,this);
-
-        /*backImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DetalleActivity.super.onBackPressed();
-            }
-        });*/
 
     }
 
