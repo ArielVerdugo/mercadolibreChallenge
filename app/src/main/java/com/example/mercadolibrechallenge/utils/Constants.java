@@ -8,7 +8,7 @@ public class Constants {
     //Clave asociada a una busqueda
     public static final String FILTRO = "filtro";
     //Base de la url para los servicios
-    public static final String BASE_URL = "https://api.mercadolibre.com/";
+    public static final String BASE_URL = "http://api.mercadolibre.com/";
 
     //Tipos de envío
     public static final String SHIPPING_FREE = "GRATIS";

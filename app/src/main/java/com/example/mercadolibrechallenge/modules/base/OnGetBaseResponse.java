@@ -64,7 +64,7 @@ public class OnGetBaseResponse<T> implements SingleObserver<Response<T>> {
     @Override
     public void onError(Throwable e) {
 
-        if (e instanceof ConnectException || e instanceof UnknownHostException  || e instanceof SSLHandshakeException ||  e instanceof ConnectionShutdownException) {
+        if (e instanceof ConnectException || e instanceof UnknownHostException  ||  e instanceof ConnectionShutdownException) {
             callback.errorConnection();
             Log.e(TAG, "error " + e.getClass().getName(), e);
         } else {
