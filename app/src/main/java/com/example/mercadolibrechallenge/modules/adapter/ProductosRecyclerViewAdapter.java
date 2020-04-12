@@ -22,11 +22,12 @@ import java.util.List;
 public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<ProductosRecyclerViewAdapter.ProductoViewHolder>{
 
 
-    private static Context context;
+    private Context context;
     private List<Producto>productos;
     private OnItemClickListener onItemClickListener;
 
     private String photo;
+    private String delivery;
 
 
     public ProductosRecyclerViewAdapter(List<Producto>productos, OnItemClickListener onItemClickListener, Context context){
@@ -41,6 +42,7 @@ public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<Productos
         private ImageView imageView;
         private TextView title;
         private TextView price;
+        private TextView delivery;
 
 
         public ProductoViewHolder(@NonNull View itemView) {
@@ -48,6 +50,7 @@ public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<Productos
             imageView = itemView.findViewById(R.id.imageProduct);
             title = itemView.findViewById(R.id.textViewTitle);
             price = itemView.findViewById(R.id.textViewPrice);
+            delivery = itemView.findViewById(R.id.textViewDelivery);
         }
     }
 
@@ -70,8 +73,10 @@ public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<Productos
     public void onBindViewHolder(@NonNull ProductoViewHolder holder,final int position) {
 
         photo = productos.get(position).getImagen();
+        delivery = BaseFunctions.getShipping(productos.get(position).getShiping().getFree());
         holder.price.setText(Format.formatDecimalSignal(productos.get(position).getPrecio()));
         holder.title.setText(productos.get(position).getTitulo());
+        holder.delivery.setText(delivery);
 
         BaseFunctions.setPhotos(context,photo,holder.imageView);
 
@@ -83,11 +88,6 @@ public class ProductosRecyclerViewAdapter extends RecyclerView.Adapter<Productos
             }
         });
 
-        /*Glide.with((Activity) context)
-                .load(productos.get(position).getImagen())
-                .apply(new RequestOptions().override(100,100))
-                .into(holder.imageView);
-        */
 
     }
 

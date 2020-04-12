@@ -8,10 +8,8 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.modules.adapter.BusquedaRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -26,8 +24,6 @@ public class BusquedaActivity extends AppCompatActivity  implements SearchView.O
 
     private SearchView search;
 
-    private RecyclerView rvHardcodeImages;
-    private BusquedaRecyclerViewAdapter recyclerImagenesAdapter;
 
 
     @Override
@@ -54,18 +50,6 @@ public class BusquedaActivity extends AppCompatActivity  implements SearchView.O
         View myLayout = findViewById( R.id.header_busqueda);
         search = myLayout.findViewById( R.id.buscar );
         search.setOnQueryTextListener(this);
-
-
-        //TODO RECYCLER
-        /*ArrayList<Integer> sampleImagesRecycler = new ArrayList<>();
-        sampleImagesRecycler.add(R.drawable.heladera);
-
-        rvHardcodeImages = findViewById(R.id.rvImagenes);
-        LinearLayoutManager llmImagenes = new LinearLayoutManager(getApplicationContext());
-        rvHardcodeImages.setLayoutManager(llmImagenes);
-
-        recyclerImagenesAdapter = new BusquedaRecyclerViewAdapter(sampleImagesRecycler, this);
-        rvHardcodeImages.setAdapter(recyclerImagenesAdapter);*/
 
 
     }

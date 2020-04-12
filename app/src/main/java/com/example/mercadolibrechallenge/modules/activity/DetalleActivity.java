@@ -75,7 +75,7 @@ public class DetalleActivity extends AppCompatActivity {
 
         rvAtributos = findViewById(R.id.rvAttributes);
         rvPhotos = findViewById(R.id.rvPhotos);
-        layoutData = findViewById(R.id.layoutConData);
+        layoutData = findViewById(R.id.groupView);
         linnearAtributos = new LinearLayoutManager(getApplicationContext());
         linnearPhotos = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
@@ -91,8 +91,6 @@ public class DetalleActivity extends AppCompatActivity {
 
         backImage = myLayout.findViewById(R.id.returnView);
         BaseFunctions.backScreen(backImage,this);
-
-
 
     }
 
