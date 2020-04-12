@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,6 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/header_detalle"
+                layout="@layout/header_activity_detalle"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/groupView"
                 android:layout_width="match_parent"
@@ -23,25 +33,15 @@
                 app:layout_constraintStart_toStartOf="@+id/layoutPadre"
                 app:layout_constraintTop_toTopOf="@+id/layoutPadre">
 
-                <include
-                    android:id="@+id/header_detalle"
-                    layout="@layout/header_activity_detalle"
-                    android:layout_width="0dp"
-                    android:layout_height="90dp"
-                    app:layout_constraintBottom_toTopOf="@+id/rvPhotos"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPhotos"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="@+id/header_detalle"
-                    app:layout_constraintStart_toStartOf="@+id/header_detalle"
-                    app:layout_constraintTop_toBottomOf="@+id/header_detalle"  />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="89dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/titleProducto"
@@ -50,8 +50,10 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:textSize="23dp"
+                    android:layout_marginBottom="258dp"
                     android:gravity="center"
+                    android:text="Titulo"
+                    android:textSize="23dp"
                     app:layout_constraintEnd_toEndOf="@+id/rvPhotos"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/rvPhotos"
@@ -64,8 +66,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:textSize="20dp"
                     android:gravity="center"
+                    android:text="ENVIO"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/titleProducto"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/titleProducto"
@@ -76,12 +79,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:text="@string/product_details"
                     android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="@+id/priceProducto"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/priceProducto"
-                    app:layout_constraintTop_toBottomOf="@+id/priceProducto"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/priceProducto" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvAttributes"
@@ -90,15 +93,41 @@
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layout_constraintEnd_toEndOf="@+id/attributes"
                     app:layout_constraintStart_toStartOf="@+id/attributes"
-                    app:layout_constraintTop_toBottomOf="@+id/attributes"/>
+                    app:layout_constraintTop_toBottomOf="@+id/attributes" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/error_sin_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <include layout="@layout/error_producto_no_encontrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include layout="@layout/error_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/carga_resultados"
@@ -111,10 +140,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <include layout="@layout/error_sin_internet"
-        android:visibility="gone"/>
-    <include layout="@layout/error_servicio"
-        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

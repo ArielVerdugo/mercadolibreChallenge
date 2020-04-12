@@ -92,6 +92,8 @@ public class DetalleActivity extends AppCompatActivity {
         backImage = myLayout.findViewById(R.id.returnView);
         BaseFunctions.backScreen(backImage,this);
 
+
+
     }
 
 
@@ -165,6 +167,7 @@ public class DetalleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 invokeDetalleService(idProducto);
+                layoutData.setVisibility(View.VISIBLE);
             }
         });
     }
