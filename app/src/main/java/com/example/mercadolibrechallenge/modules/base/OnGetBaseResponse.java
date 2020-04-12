@@ -5,9 +5,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.net.ConnectException;
+import java.net.UnknownHostException;
+
+import javax.net.ssl.SSLHandshakeException;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
+import okhttp3.internal.http2.ConnectionShutdownException;
 import retrofit2.Response;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -39,19 +43,6 @@ public class OnGetBaseResponse<T> implements SingleObserver<Response<T>> {
 
     }
 
-    @Override
-    public void onError(Throwable e) {
-
-        if (e instanceof ConnectException) {
-            callback.errorConnection();
-            Log.e(TAG, "error " + e.getClass() + e.getMessage(), e);
-        } else {
-            callback.errorDefault();
-            Log.e(TAG, "error " + e.getClass() + e.getMessage(), e);
-        }
-        mSubscription.dispose();
-    }
-
     protected void success(Response<T> response) {
         callback.success(response.body());
     }
@@ -67,6 +58,20 @@ public class OnGetBaseResponse<T> implements SingleObserver<Response<T>> {
                 Log.e(TAG, "error " + response.code());
                 break;
         }
+    }
+
+
+    @Override
+    public void onError(Throwable e) {
+
+        if (e instanceof ConnectException || e instanceof UnknownHostException  || e instanceof SSLHandshakeException ||  e instanceof ConnectionShutdownException) {
+            callback.errorConnection();
+            Log.e(TAG, "error " + e.getClass().getName(), e);
+        } else {
+            callback.errorDefault();
+            Log.e(TAG, "error " + e.getClass().getName(), e);
+        }
+        mSubscription.dispose();
     }
 
 }

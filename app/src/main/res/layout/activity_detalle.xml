@@ -52,7 +52,6 @@
                     android:layout_marginRight="8dp"
                     android:textSize="23dp"
                     android:gravity="center"
-                    android:text="Titulo"
                     app:layout_constraintEnd_toEndOf="@+id/rvPhotos"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/rvPhotos"
@@ -67,7 +66,6 @@
                     android:layout_marginRight="8dp"
                     android:textSize="20dp"
                     android:gravity="center"
-                    android:text="ENVIO"
                     app:layout_constraintEnd_toEndOf="@+id/titleProducto"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/titleProducto"
@@ -77,7 +75,6 @@
                     android:id="@+id/attributes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/product_details"
                     android:gravity="center"
                     android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="@+id/priceProducto"
@@ -103,9 +100,18 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <ProgressBar
+        android:id="@+id/carga_resultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <include layout="@layout/error_sin_internet"
-        android:visibility="gone"/>
-    <include layout="@layout/error_producto_no_encontrado"
         android:visibility="gone"/>
     <include layout="@layout/error_servicio"
         android:visibility="gone"/>

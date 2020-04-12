@@ -3,7 +3,9 @@ package com.example.mercadolibrechallenge.modules.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -47,6 +49,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private ProductosRecyclerViewAdapter adapterProducto;
 
     private TextView productHeader;
+    private ProgressBar progressBar;
+    private Button retryButton;
 
 
 
@@ -57,15 +61,17 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
         Intent mIntent = getIntent();
         this.producto = mIntent.getStringExtra(FILTRO);
-        invokeBusquedaService(producto);
 
         findComponents();
+        invokeBusquedaService(producto);
 
     }
 
     private void findComponents() {
 
         layoutErrorInternet = findViewById(R.id.layoutErrorConeccion);
+        retryButton = layoutErrorInternet.findViewById(R.id.botonReintentar);
+
         layoutErrorServicio = findViewById(R.id.layoutErrorServicio);
         layoutSinDatos = findViewById(R.id.layoutSinDatos);
 
@@ -74,6 +80,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         LinearLayoutManager llmImagenes = new LinearLayoutManager(getApplicationContext());
         rvProductos.setLayoutManager(llmImagenes);
 
+        progressBar = findViewById(R.id.carga_resultados);
 
         View myLayout = findViewById( R.id.header_productos);
         backImage = myLayout.findViewById(R.id.returnView);
@@ -90,17 +97,12 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
                 if (!response.getProductos().isEmpty())
                 {
-                    layoutErrorServicio.setVisibility(View.GONE);
-                    layoutErrorInternet.setVisibility(View.GONE);
-                    layoutSinDatos.setVisibility(View.GONE);
                     productos = response.getProductos();
                     adapterProducto = new ProductosRecyclerViewAdapter(response.getProductos(),ProductosActivity.this ,ProductosActivity.this);
                     rvProductos.setAdapter(adapterProducto);
                 }
                 else{
                     layoutSinDatos.setVisibility(View.VISIBLE);
-                    layoutErrorServicio.setVisibility(View.GONE);
-                    layoutErrorInternet.setVisibility(View.GONE);
                     rvProductos.setVisibility(View.GONE);
                 }
 
@@ -109,16 +111,12 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
             @Override
             public void error400() {
                 layoutErrorServicio.setVisibility(View.VISIBLE);
-                layoutSinDatos.setVisibility(View.GONE);
-                layoutErrorInternet.setVisibility(View.GONE);
                 rvProductos.setVisibility(View.GONE);
             }
 
             @Override
             public void errorDefault() {
                 layoutErrorServicio.setVisibility(View.VISIBLE);
-                layoutSinDatos.setVisibility(View.GONE);
-                layoutErrorInternet.setVisibility(View.GONE);
                 rvProductos.setVisibility(View.GONE);
             }
 
@@ -126,9 +124,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
             @Override
             public void errorConnection() {
                 layoutErrorInternet.setVisibility(View.VISIBLE);
-                layoutErrorServicio.setVisibility(View.GONE);
-                layoutSinDatos.setVisibility(View.GONE);
                 rvProductos.setVisibility(View.GONE);
+                retrySearch();
             }
         };
 
@@ -137,13 +134,13 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-
+                        showLoading();
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-
+                        stopLoading();
                     }
                 })
                 .subscribe(new OnGetBaseResponse(ProductosActivity.this, callback));
@@ -153,5 +150,27 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     @Override
     public void onItemClick(int position) {
         BaseFunctions.redirectActivityWithString(this,DetalleActivity.class,ID_PRODUCTO,productos.get(position).getId());
+    }
+
+
+    public void showLoading() {
+        layoutErrorInternet.setVisibility(View.GONE);
+        layoutErrorServicio.setVisibility(View.GONE);
+        layoutSinDatos.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void stopLoading() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    public void retrySearch(){
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                invokeBusquedaService(producto);
+                rvProductos.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

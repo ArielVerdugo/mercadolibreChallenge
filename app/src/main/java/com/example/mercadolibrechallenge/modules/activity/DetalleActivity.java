@@ -1,10 +1,11 @@
 package com.example.mercadolibrechallenge.modules.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -22,7 +23,6 @@ import com.example.mercadolibrechallenge.service.detalle.DetalleServiceImplement
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
 
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -35,7 +35,8 @@ public class DetalleActivity extends AppCompatActivity {
     private ImageView backImage;
     private TextView productTitle;
     private TextView productPrice;
-    private TextView productHeader;
+    private ProgressBar progressBar;
+    private Button retryButton;
 
     private String idProducto;
 
@@ -51,7 +52,8 @@ public class DetalleActivity extends AppCompatActivity {
 
     private View layoutErrorInternet;
     private View layoutErrorServicio;
-    private View layoutSinDatos;
+
+    private View layoutData;
 
 
     @Override
@@ -73,16 +75,18 @@ public class DetalleActivity extends AppCompatActivity {
 
         rvAtributos = findViewById(R.id.rvAttributes);
         rvPhotos = findViewById(R.id.rvPhotos);
-
+        layoutData = findViewById(R.id.layoutConData);
         linnearAtributos = new LinearLayoutManager(getApplicationContext());
         linnearPhotos = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
         rvAtributos.setLayoutManager(linnearAtributos);
         rvPhotos.setLayoutManager(linnearPhotos);
 
+        progressBar = findViewById(R.id.carga_resultados);
+
         layoutErrorInternet = findViewById(R.id.layoutErrorConeccion);
+        retryButton = layoutErrorInternet.findViewById(R.id.botonReintentar);
         layoutErrorServicio = findViewById(R.id.layoutErrorServicio);
-        layoutSinDatos = findViewById(R.id.layoutSinDatos);
         View myLayout = findViewById( R.id.header_detalle);
 
         backImage = myLayout.findViewById(R.id.returnView);
@@ -110,17 +114,21 @@ public class DetalleActivity extends AppCompatActivity {
 
             @Override
             public void error400() {
-
+                layoutErrorServicio.setVisibility(View.VISIBLE);
+                layoutData.setVisibility(View.GONE);
             }
 
             @Override
             public void errorDefault() {
-
+                layoutErrorServicio.setVisibility(View.VISIBLE);
+                layoutData.setVisibility(View.GONE);
             }
 
             @Override
             public void errorConnection() {
-
+                layoutData.setVisibility(View.GONE);
+                layoutErrorInternet.setVisibility(View.VISIBLE);
+                retrySearch();
             }
         };
 
@@ -130,16 +138,35 @@ public class DetalleActivity extends AppCompatActivity {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-
+                        showLoading();
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-
+                        stopLoading();
                     }
                 })
                 .subscribe(new OnGetBaseResponse(DetalleActivity.this, callback));
+    }
+
+    public void showLoading() {
+        layoutErrorInternet.setVisibility(View.GONE);
+        layoutErrorServicio.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void stopLoading() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    public void retrySearch(){
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                invokeDetalleService(idProducto);
+            }
+        });
     }
 
 
