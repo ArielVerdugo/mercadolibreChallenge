@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.modules.activity.ProductosActivity;
 
 import static com.example.mercadolibrechallenge.utils.Constants.FILTRO;
@@ -30,6 +32,7 @@ public class BaseFunctions {
     public static void setPhotos(Context context,String img, ImageView view) {
         Glide.with(context)
                 .load(img)
+                .apply(new RequestOptions().placeholder(R.drawable.ic_holder).error(R.drawable.ic_holder))
                 .into(view);
     }
 
