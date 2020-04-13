@@ -51,7 +51,6 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="258dp"
                     android:gravity="center"
-                    android:text="Titulo"
                     android:textSize="23dp"
                     app:layout_constraintEnd_toEndOf="@+id/rvPhotos"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -66,33 +65,22 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:gravity="center"
-                    android:text="ENVIO"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/titleProducto"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/titleProducto"
                     app:layout_constraintTop_toBottomOf="@+id/titleProducto" />
 
-                <TextView
-                    android:id="@+id/attributes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/product_details"
-                    android:textSize="15dp"
-                    app:layout_constraintEnd_toEndOf="@+id/priceProducto"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/priceProducto"
-                    app:layout_constraintTop_toBottomOf="@+id/priceProducto" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvAttributes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layout_constraintEnd_toEndOf="@+id/attributes"
-                    app:layout_constraintStart_toStartOf="@+id/attributes"
-                    app:layout_constraintTop_toBottomOf="@+id/attributes" />
+                    app:layout_constraintEnd_toEndOf="@+id/priceProducto"
+                    app:layout_constraintStart_toStartOf="@+id/priceProducto"
+                    app:layout_constraintTop_toBottomOf="@+id/priceProducto" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

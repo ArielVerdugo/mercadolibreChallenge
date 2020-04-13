@@ -57,14 +57,18 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.274"
                         app:layout_constraintRight_toRightOf="@+id/linearLayout8"
                         app:layout_constraintStart_toEndOf="@+id/linearLayout8"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.484">
 
                         <TextView
                             android:id="@+id/textViewTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_margin="5dp"
                             android:text="Fecha de pago" />
 
@@ -72,6 +76,8 @@
                             android:id="@+id/textViewPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
                             android:layout_margin="5dp"
                             android:text="$1000" />
 
@@ -80,6 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:textColor="@color/colorGreen"
                             android:text="Envio gratis" />
 
 
