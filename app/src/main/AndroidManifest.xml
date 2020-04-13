@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modules.activity.BusquedaActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity android:name=".modules.activity.BusquedaActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".modules.activity.ProductosActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name=".modules.activity.DetalleActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name=".modules.activity.SplashActivity"

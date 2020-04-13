@@ -29,48 +29,41 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/layoutPadre"
-                app:layout_constraintTop_toTopOf="@+id/layoutPadre">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_detalle">
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPhotos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="89dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/titleProducto"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="258dp"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:textSize="23dp"
-                    app:layout_constraintEnd_toEndOf="@+id/rvPhotos"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/rvPhotos"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvPhotos" />
 
                 <TextView
                     android:id="@+id/priceProducto"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
                     android:gravity="center"
+                    android:layout_margin="10dp"
                     android:textSize="25dp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/titleProducto"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/titleProducto"
-                    app:layout_constraintTop_toBottomOf="@+id/titleProducto" />
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleProducto"  />
 
 
                 <androidx.recyclerview.widget.RecyclerView
