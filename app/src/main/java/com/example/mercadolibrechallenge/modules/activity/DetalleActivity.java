@@ -19,16 +19,10 @@ import com.example.mercadolibrechallenge.modules.Contract.DetalleContract;
 import com.example.mercadolibrechallenge.modules.adapter.AtributosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.adapter.PhotosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
-import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
 import com.example.mercadolibrechallenge.service.detalle.DetalleModel;
-import com.example.mercadolibrechallenge.service.detalle.DetalleServiceImplementation;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 import static com.example.mercadolibrechallenge.utils.Constants.ID_PRODUCTO;
 
