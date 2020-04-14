@@ -17,25 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.model.s.Producto;
 import com.example.mercadolibrechallenge.model.s.ProductosResponse;
+import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.adapter.ProductosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
-import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
-import com.example.mercadolibrechallenge.service.busqueda.BusquedaServiceImplementation;
+import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-
 import static com.example.mercadolibrechallenge.utils.Constants.FILTRO;
 import static com.example.mercadolibrechallenge.utils.Constants.ID_PRODUCTO;
 
 
-public class ProductosActivity extends AppCompatActivity implements OnItemClickListener {
+public class ProductosActivity extends AppCompatActivity implements OnItemClickListener, ProductoContract.View {
 
     private String producto;
     private View layoutErrorInternet;
@@ -52,6 +47,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private ProgressBar progressBar;
     private Button retryButton;
 
+    private ProductoContract.Model model;
+
 
 
     @Override
@@ -63,11 +60,12 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         this.producto = mIntent.getStringExtra(FILTRO);
 
         findComponents();
+        model = new BusquedaModel(this);
         invokeBusquedaService(producto);
 
     }
 
-    private void findComponents() {
+    public void findComponents() {
 
         layoutErrorInternet = findViewById(R.id.layoutErrorConeccion);
         retryButton = layoutErrorInternet.findViewById(R.id.botonReintentar);
@@ -129,21 +127,8 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
             }
         };
 
-        BusquedaServiceImplementation busquedaService = new BusquedaServiceImplementation();
-        busquedaService.getProductos(producto).observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        showLoading();
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        stopLoading();
-                    }
-                })
-                .subscribe(new OnGetBaseResponse(ProductosActivity.this, callback));
+        model.getProductos(producto,callback,this);
+
 
     }
 

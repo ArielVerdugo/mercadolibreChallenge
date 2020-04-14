@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.model.s.DetalleResponse;
+import com.example.mercadolibrechallenge.modules.Contract.DetalleContract;
 import com.example.mercadolibrechallenge.modules.adapter.AtributosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.adapter.PhotosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
+import com.example.mercadolibrechallenge.service.detalle.DetalleModel;
 import com.example.mercadolibrechallenge.service.detalle.DetalleServiceImplementation;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
@@ -30,7 +32,7 @@ import io.reactivex.functions.Consumer;
 
 import static com.example.mercadolibrechallenge.utils.Constants.ID_PRODUCTO;
 
-public class DetalleActivity extends AppCompatActivity {
+public class DetalleActivity extends AppCompatActivity implements DetalleContract.View {
 
     private ImageView backImage;
     private TextView productTitle;
@@ -54,6 +56,7 @@ public class DetalleActivity extends AppCompatActivity {
     private View layoutErrorServicio;
 
     private View layoutData;
+    private DetalleContract.Model model;
 
 
     @Override
@@ -62,13 +65,14 @@ public class DetalleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle);
 
         findComponents();
+        model = new DetalleModel(this);
         Intent mIntent = getIntent();
         idProducto = mIntent.getStringExtra(ID_PRODUCTO);
         invokeDetalleService(idProducto);
 
     }
 
-    private void findComponents() {
+    public void findComponents() {
         productTitle = findViewById(R.id.titleProducto);
         productPrice = findViewById(R.id.priceProducto);
 
@@ -132,22 +136,7 @@ public class DetalleActivity extends AppCompatActivity {
             }
         };
 
-
-        DetalleServiceImplementation detalleServiceImplementation = new DetalleServiceImplementation();
-        detalleServiceImplementation.getDetalle(idProducto).observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        showLoading();
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        stopLoading();
-                    }
-                })
-                .subscribe(new OnGetBaseResponse(DetalleActivity.this, callback));
+        model.getDetalle(idProducto,callback,this);
     }
 
     public void showLoading() {
