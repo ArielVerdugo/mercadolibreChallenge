@@ -1,7 +1,6 @@
 package com.example.mercadolibrechallenge.service.busqueda;
-import android.app.Activity;
 import com.example.mercadolibrechallenge.model.ProductosResponse;
-import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
+import com.example.mercadolibrechallenge.modules.contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
 import io.reactivex.android.schedulers.AndroidSchedulers;

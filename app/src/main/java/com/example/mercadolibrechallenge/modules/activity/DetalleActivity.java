@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.model.DetalleResponse;
-import com.example.mercadolibrechallenge.modules.Contract.DetalleContract;
+import com.example.mercadolibrechallenge.modules.contract.DetalleContract;
 import com.example.mercadolibrechallenge.modules.adapter.AtributosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.adapter.PhotosRecyclerViewAdapter;
-import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
+import com.example.mercadolibrechallenge.modules.presenter.DetallePresenter;
 import com.example.mercadolibrechallenge.service.detalle.DetalleModel;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 import com.example.mercadolibrechallenge.utils.Format;
@@ -50,7 +50,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleContrac
     private View layoutErrorServicio;
 
     private View layoutData;
-    private DetalleContract.Model model;
+    private DetallePresenter detallePresenter;
 
 
     @Override
@@ -59,10 +59,10 @@ public class DetalleActivity extends AppCompatActivity implements DetalleContrac
         setContentView(R.layout.activity_detalle);
 
         findComponents();
-        model = new DetalleModel(this);
         Intent mIntent = getIntent();
         idProducto = mIntent.getStringExtra(ID_PRODUCTO);
-        invokeDetalleService(idProducto);
+        detallePresenter = new DetallePresenter(this);
+        detallePresenter.requestDataDetalle(idProducto);
 
     }
 
@@ -92,46 +92,39 @@ public class DetalleActivity extends AppCompatActivity implements DetalleContrac
 
     }
 
+    @Override
+    public void onDetalleResponseSuccess(DetalleResponse response) {
 
+        layoutData.setVisibility(View.VISIBLE);
+        productTitle.setText(response.getTitle());
+        productPrice.setText("$" + Format.formatDecimal(response.getPrice()));
 
-    private void invokeDetalleService(String idProducto) {
+        atributosAdapter = new AtributosRecyclerViewAdapter(DetalleActivity.this,response.getAtributos());
+        rvAtributos.setAdapter(atributosAdapter);
 
-        GetBaseCallback callback = new GetBaseCallback<DetalleResponse>() {
-            @Override
-            public void success(DetalleResponse response) {
-                productTitle.setText(response.getTitle());
-                productPrice.setText("$" + Format.formatDecimal(response.getPrice()));
-
-                atributosAdapter = new AtributosRecyclerViewAdapter(DetalleActivity.this,response.getAtributos());
-                rvAtributos.setAdapter(atributosAdapter);
-
-                photosAdapter = new PhotosRecyclerViewAdapter(DetalleActivity.this,response.getPhotos());
-                rvPhotos.setAdapter(photosAdapter);
-
-            }
-
-            @Override
-            public void error400() {
-                layoutErrorServicio.setVisibility(View.VISIBLE);
-                layoutData.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void errorDefault() {
-                layoutErrorServicio.setVisibility(View.VISIBLE);
-                layoutData.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void errorConnection() {
-                layoutData.setVisibility(View.GONE);
-                layoutErrorInternet.setVisibility(View.VISIBLE);
-                retrySearch();
-            }
-        };
-
-        model.getDetalle(idProducto,callback,this);
+        photosAdapter = new PhotosRecyclerViewAdapter(DetalleActivity.this,response.getPhotos());
+        rvPhotos.setAdapter(photosAdapter);
     }
+
+    @Override
+    public void onDetalleResponseFailure() {
+        layoutErrorServicio.setVisibility(View.VISIBLE);
+        layoutData.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDetalleResponseFailureConnection() {
+        layoutData.setVisibility(View.GONE);
+        layoutErrorInternet.setVisibility(View.VISIBLE);
+        retrySearch();
+    }
+
+    @Override
+    public void onDetalleResponseError() {
+        layoutErrorServicio.setVisibility(View.VISIBLE);
+        layoutData.setVisibility(View.GONE);
+    }
+
 
     public void showLoading() {
         layoutErrorInternet.setVisibility(View.GONE);
@@ -147,8 +140,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleContrac
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                invokeDetalleService(idProducto);
-                layoutData.setVisibility(View.VISIBLE);
+                detallePresenter.requestDataDetalle(idProducto);
             }
         });
     }

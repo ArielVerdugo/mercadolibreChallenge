@@ -1,6 +1,4 @@
-package com.example.mercadolibrechallenge.modules.Contract;
-
-import android.app.Activity;
+package com.example.mercadolibrechallenge.modules.contract;
 
 import com.example.mercadolibrechallenge.model.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;

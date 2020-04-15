@@ -1,7 +1,7 @@
 package com.example.mercadolibrechallenge.modules.presenter;
 
 import com.example.mercadolibrechallenge.model.ProductosResponse;
-import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
+import com.example.mercadolibrechallenge.modules.contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
 

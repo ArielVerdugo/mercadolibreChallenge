@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mercadolibrechallenge.R;
 import com.example.mercadolibrechallenge.model.Producto;
 import com.example.mercadolibrechallenge.model.ProductosResponse;
-import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
+import com.example.mercadolibrechallenge.modules.contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.adapter.ProductosRecyclerViewAdapter;
-import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.presenter.ProductoPresenter;
-import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
