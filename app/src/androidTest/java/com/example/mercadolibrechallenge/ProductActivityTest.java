@@ -53,7 +53,7 @@ public class ProductActivityTest {
 
     private Producto producto;
     private Envio envio;
-    List<Producto>productos = new ArrayList<>();
+
 
 
 
@@ -82,9 +82,16 @@ public class ProductActivityTest {
     public void testViewProductoExistente(){
         envio = new Envio();
         producto = new Producto("producto_inexistente",25.02,"Viejo","imagen_inexistente","no existe",envio,120,110);
-        productos = new ArrayList<>();
+        List<Producto>productos = new ArrayList<>();
         productos.add(producto);
-        response.setProductos(productos);
+        //response.setProductos(productos);
+
+        Mockito.when(response.getProductos()).thenReturn(productos);
+
+        Assert.assertEquals (viewSinData.getVisibility(),View.GONE);
+        Assert.assertEquals (rvProductos.getVisibility(),View.VISIBLE);
+        Assert.assertEquals (viewErrorServicio.getVisibility(),View.GONE);
+        Assert.assertEquals (viewErrorConeccion.getVisibility(),View.GONE);
 
 
     }
