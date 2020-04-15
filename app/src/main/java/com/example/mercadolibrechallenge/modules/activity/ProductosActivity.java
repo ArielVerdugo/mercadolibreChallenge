@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -15,11 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.model.s.Producto;
-import com.example.mercadolibrechallenge.model.s.ProductosResponse;
+import com.example.mercadolibrechallenge.model.Producto;
+import com.example.mercadolibrechallenge.model.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.adapter.ProductosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
+import com.example.mercadolibrechallenge.modules.presenter.ProductoPresenter;
 import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
@@ -47,8 +47,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private ProgressBar progressBar;
     private Button retryButton;
 
-    private ProductoContract.Model model;
-
+    private ProductoContract.Presenter productPresenter;
 
 
     @Override
@@ -57,11 +56,11 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         setContentView(R.layout.activity_productos);
 
         Intent mIntent = getIntent();
-        this.producto = mIntent.getStringExtra(FILTRO);
+        producto = mIntent.getStringExtra(FILTRO);
 
         findComponents();
-        model = new BusquedaModel(this);
-        invokeBusquedaService(producto);
+        productPresenter = new ProductoPresenter(this);
+        productPresenter.requestDataProduct(producto);
 
     }
 
@@ -88,48 +87,39 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
 
     }
 
-    private void invokeBusquedaService(final String producto){
-        GetBaseCallback callback = new GetBaseCallback<ProductosResponse>() {
-            @Override
-            public void success(ProductosResponse response) {
+    @Override
+    public void onProductoResponseSuccess(ProductosResponse response) {
+        if (!response.getProductos().isEmpty())
+        {
+            productos = response.getProductos();
+            adapterProducto = new ProductosRecyclerViewAdapter(response.getProductos(),ProductosActivity.this ,ProductosActivity.this);
+            rvProductos.setAdapter(adapterProducto);
+            rvProductos.setVisibility(View.VISIBLE);
+        }
+        else{
+            layoutSinDatos.setVisibility(View.VISIBLE);
+            rvProductos.setVisibility(View.GONE);
+        }
+    }
 
-                if (!response.getProductos().isEmpty())
-                {
-                    productos = response.getProductos();
-                    adapterProducto = new ProductosRecyclerViewAdapter(response.getProductos(),ProductosActivity.this ,ProductosActivity.this);
-                    rvProductos.setAdapter(adapterProducto);
-                }
-                else{
-                    layoutSinDatos.setVisibility(View.VISIBLE);
-                    rvProductos.setVisibility(View.GONE);
-                }
+    @Override
+    public void onProductoResponseFailure() {
+        layoutErrorServicio.setVisibility(View.VISIBLE);
+        rvProductos.setVisibility(View.GONE);
+    }
 
-            }
+    @Override
+    public void onProductoResponseFailureConnection() {
+        layoutErrorInternet.setVisibility(View.VISIBLE);
+        rvProductos.setVisibility(View.GONE);
+        retrySearch();
 
-            @Override
-            public void error400() {
-                layoutErrorServicio.setVisibility(View.VISIBLE);
-                rvProductos.setVisibility(View.GONE);
-            }
+    }
 
-            @Override
-            public void errorDefault() {
-                layoutErrorServicio.setVisibility(View.VISIBLE);
-                rvProductos.setVisibility(View.GONE);
-            }
-
-
-            @Override
-            public void errorConnection() {
-                layoutErrorInternet.setVisibility(View.VISIBLE);
-                rvProductos.setVisibility(View.GONE);
-                retrySearch();
-            }
-        };
-
-        model.getProductos(producto,callback,this);
-
-
+    @Override
+    public void onProductoResponseError() {
+        layoutErrorServicio.setVisibility(View.VISIBLE);
+        rvProductos.setVisibility(View.GONE);
     }
 
     @Override
@@ -153,8 +143,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                invokeBusquedaService(producto);
-                rvProductos.setVisibility(View.VISIBLE);
+                productPresenter.requestDataProduct(producto);
             }
         });
     }

@@ -2,12 +2,9 @@ package com.example.mercadolibrechallenge.modules.base;
 
 import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
-
-import javax.net.ssl.SSLHandshakeException;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -18,12 +15,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class OnGetBaseResponse<T> implements SingleObserver<Response<T>> {
 
-    protected Activity activity;
     protected Disposable mSubscription;
     protected GetBaseCallback<T> callback;
 
-    public OnGetBaseResponse(Activity activity, GetBaseCallback<T> callback) {
-        this.activity = activity;
+    public OnGetBaseResponse(GetBaseCallback<T> callback) {
         this.callback = callback;
     }
 

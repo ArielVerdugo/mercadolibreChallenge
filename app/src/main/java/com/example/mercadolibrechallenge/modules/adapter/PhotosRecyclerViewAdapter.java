@@ -10,10 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.model.s.PhotoResponse;
+import com.example.mercadolibrechallenge.model.PhotoResponse;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
-import java.io.IOException;
 import java.util.List;
 
 public class PhotosRecyclerViewAdapter extends RecyclerView.Adapter<PhotosRecyclerViewAdapter.PhotosViewHolder> {

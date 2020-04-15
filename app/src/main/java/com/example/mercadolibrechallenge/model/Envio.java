@@ -1,4 +1,4 @@
-package com.example.mercadolibrechallenge.model.s;
+package com.example.mercadolibrechallenge.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

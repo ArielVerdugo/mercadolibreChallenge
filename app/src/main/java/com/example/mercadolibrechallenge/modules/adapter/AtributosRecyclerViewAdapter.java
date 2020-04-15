@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.model.s.Atributo;
+import com.example.mercadolibrechallenge.model.Atributo;
 
 import java.util.List;
 

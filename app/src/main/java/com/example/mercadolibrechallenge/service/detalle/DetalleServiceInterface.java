@@ -1,6 +1,6 @@
 package com.example.mercadolibrechallenge.service.detalle;
 
-import com.example.mercadolibrechallenge.model.s.DetalleResponse;
+import com.example.mercadolibrechallenge.model.DetalleResponse;
 
 import io.reactivex.Single;
 import retrofit2.Response;

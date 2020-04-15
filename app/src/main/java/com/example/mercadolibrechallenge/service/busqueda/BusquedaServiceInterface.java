@@ -1,6 +1,6 @@
 package com.example.mercadolibrechallenge.service.busqueda;
 
-import com.example.mercadolibrechallenge.model.s.ProductosResponse;
+import com.example.mercadolibrechallenge.model.ProductosResponse;
 
 import io.reactivex.Single;
 import retrofit2.Response;

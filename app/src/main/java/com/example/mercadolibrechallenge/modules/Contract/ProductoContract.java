@@ -2,17 +2,21 @@ package com.example.mercadolibrechallenge.modules.Contract;
 
 import android.app.Activity;
 
-import com.example.mercadolibrechallenge.model.s.ProductosResponse;
+import com.example.mercadolibrechallenge.model.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 
 public interface ProductoContract {
 
     interface Presenter {
+
+        void onDestroy();
+        void requestDataProduct(String query);
     }
 
 
     interface Model {
-        void getProductos(String producto, GetBaseCallback<ProductosResponse> callback, Activity activity);
+
+        void getProductos(String producto, GetBaseCallback<ProductosResponse> callback);
     }
 
     interface View {
@@ -22,6 +26,14 @@ public interface ProductoContract {
         void stopLoading();
 
         void findComponents();
+
+        void onProductoResponseSuccess(ProductosResponse response);
+
+        void onProductoResponseFailure();
+
+        void onProductoResponseFailureConnection();
+
+        void onProductoResponseError();
 
         void retrySearch();
     }

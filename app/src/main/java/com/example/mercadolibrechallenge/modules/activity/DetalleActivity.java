@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
-import com.example.mercadolibrechallenge.model.s.DetalleResponse;
+import com.example.mercadolibrechallenge.model.DetalleResponse;
 import com.example.mercadolibrechallenge.modules.Contract.DetalleContract;
 import com.example.mercadolibrechallenge.modules.adapter.AtributosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.adapter.PhotosRecyclerViewAdapter;

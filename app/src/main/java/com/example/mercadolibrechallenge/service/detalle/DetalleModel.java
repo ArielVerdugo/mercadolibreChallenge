@@ -2,7 +2,7 @@ package com.example.mercadolibrechallenge.service.detalle;
 
 import android.app.Activity;
 
-import com.example.mercadolibrechallenge.model.s.DetalleResponse;
+import com.example.mercadolibrechallenge.model.DetalleResponse;
 import com.example.mercadolibrechallenge.modules.Contract.DetalleContract;
 import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
 import com.example.mercadolibrechallenge.modules.base.OnGetBaseResponse;
@@ -36,6 +36,6 @@ public class DetalleModel implements DetalleContract.Model {
                         view.stopLoading();
                     }
                 })
-                .subscribe(new OnGetBaseResponse(activity, callback));
+                .subscribe(new OnGetBaseResponse(callback));
     }
 }

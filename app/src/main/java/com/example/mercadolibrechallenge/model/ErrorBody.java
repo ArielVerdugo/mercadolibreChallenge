@@ -1,4 +1,4 @@
-package com.example.mercadolibrechallenge.model.s;
+package com.example.mercadolibrechallenge.model;
 
 public class ErrorBody {
     private String debugMessage;
