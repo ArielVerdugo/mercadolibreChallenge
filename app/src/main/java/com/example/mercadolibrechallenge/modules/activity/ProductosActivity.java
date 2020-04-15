@@ -2,6 +2,7 @@ package com.example.mercadolibrechallenge.modules.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mercadolibrechallenge.R;
+import com.example.mercadolibrechallenge.model.s.Envio;
 import com.example.mercadolibrechallenge.model.s.Producto;
 import com.example.mercadolibrechallenge.model.s.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.Contract.ProductoContract;
@@ -26,6 +28,7 @@ import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.mercadolibrechallenge.utils.Constants.FILTRO;
 import static com.example.mercadolibrechallenge.utils.Constants.ID_PRODUCTO;
 
@@ -92,7 +95,6 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         GetBaseCallback callback = new GetBaseCallback<ProductosResponse>() {
             @Override
             public void success(ProductosResponse response) {
-
                 if (!response.getProductos().isEmpty())
                 {
                     productos = response.getProductos();

@@ -39,7 +39,16 @@ public class Producto {
     @Expose
     private Integer cantidadVendida;
 
-
+    public Producto(String id, Double precio, String condicion, String imagen, String titulo, Envio shipping, Integer cantidadDisponible, Integer cantidadVendida) {
+        this.id = id;
+        this.precio = precio;
+        this.condicion = condicion;
+        this.imagen = imagen;
+        this.titulo = titulo;
+        this.shipping = shipping;
+        this.cantidadDisponible = cantidadDisponible;
+        this.cantidadVendida = cantidadVendida;
+    }
 
     public String getId() {
         return id;
