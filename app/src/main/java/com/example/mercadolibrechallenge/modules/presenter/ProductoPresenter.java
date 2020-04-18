@@ -12,9 +12,9 @@ public class ProductoPresenter implements ProductoContract.Presenter, GetBaseCal
     private ProductoContract.Model productoModel;
 
 
-    public ProductoPresenter(ProductoContract.View productoView) {
+    public ProductoPresenter(ProductoContract.View productoView,ProductoContract.Model productoModel) {
         this.productoView = productoView;
-        this.productoModel = new BusquedaModel();
+        this.productoModel = productoModel;
     }
 
     @Override

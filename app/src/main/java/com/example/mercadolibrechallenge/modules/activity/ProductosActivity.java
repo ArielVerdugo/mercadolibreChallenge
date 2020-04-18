@@ -19,6 +19,7 @@ import com.example.mercadolibrechallenge.model.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.contract.ProductoContract;
 import com.example.mercadolibrechallenge.modules.adapter.ProductosRecyclerViewAdapter;
 import com.example.mercadolibrechallenge.modules.presenter.ProductoPresenter;
+import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
 import com.example.mercadolibrechallenge.service.busqueda.OnItemClickListener;
 import com.example.mercadolibrechallenge.utils.BaseFunctions;
 
@@ -45,6 +46,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private ProgressBar progressBar;
     private Button retryButton;
 
+    private ProductosResponse productosResponse;
     private ProductoContract.Presenter productPresenter;
 
 
@@ -57,7 +59,7 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
         producto = mIntent.getStringExtra(FILTRO);
 
         findComponents();
-        productPresenter = new ProductoPresenter(this);
+        productPresenter = new ProductoPresenter(this,new BusquedaModel());
         productPresenter.requestDataProduct(producto);
 
     }
