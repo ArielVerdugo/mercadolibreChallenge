@@ -3,11 +3,15 @@ package com.example.mercadolibrechallenge;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.mercadolibrechallenge.modules.activity.BusquedaActivity;
+import com.example.mercadolibrechallenge.modules.activity.DetalleActivity;
+import com.example.mercadolibrechallenge.modules.activity.ProductosActivity;
+
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,15 +27,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class BusquedaProductoTest {
+public class DetalleProductoTest {
 
     private String stringValid;
-    private String stringInvalid;
 
     @Rule
-    public ActivityTestRule<BusquedaActivity> activityRule = new ActivityTestRule<>(BusquedaActivity.class);
+    public ActivityTestRule<BusquedaActivity> activityRuleBusqueda = new ActivityTestRule<>(BusquedaActivity.class);
 
-    BusquedaActivity pActivity;
+    @Rule
+    public ActivityTestRule<ProductosActivity> activityRuleProducto = new ActivityTestRule<>(ProductosActivity.class);
+
+    BusquedaActivity busquedaActivity;
+    ProductosActivity productosActivity;
     Integer longTime;
     Integer middleTime;
     Integer shortTime;
@@ -44,18 +51,15 @@ public class BusquedaProductoTest {
     }
 
     @Before
-    public void initIntvalidString() {
-        // producto invalido
-        stringInvalid = "ijasfdihsdfgefdihofaijpsda";
-    }
-
-    @Before
     public void initIntValues() {
-        // obtener referencia de la activity
-        pActivity = activityRule.getActivity();
+        // obtener referencia de la activity busqueda
+        //busquedaActivity = activityRuleBusqueda.getActivity();
+
+        // obtener referencia de la activity detalle
+        productosActivity = activityRuleProducto.getActivity();
 
         // referencia para habilitar o cortar el wifi
-        wifiManager = (WifiManager) pActivity.getSystemService(Context.WIFI_SERVICE);
+        wifiManager = (WifiManager) productosActivity.getSystemService(Context.WIFI_SERVICE);
 
         // tiempo de espera
         middleTime = 5000;
@@ -63,46 +67,41 @@ public class BusquedaProductoTest {
         longTime = 13000;
     }
 
-
-    @Test
-    public void findValidProduct() throws InterruptedException {
+    @Before
+    public void initSearchProducto() throws InterruptedException{
         wifiManager.setWifiEnabled(true);
         onView(withId(R.id.buscar))
                 .perform(SearchViewActionExtension.Companion.submitText(stringValid));
+        Thread.sleep(longTime);
+    }
+
+
+    @Test
+    public void selectProduct()throws InterruptedException{
+        onView(withId(R.id.rv_resultados_busqueda))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         Thread.sleep(middleTime);
 
-        onView(withId((R.id.rv_resultados_busqueda)))
+        onView(withId((R.id.layoutConData)))
                 .check(matches(isDisplayed()));
     }
 
-    @Test
-    public void findInvalidProduct() throws InterruptedException {
-        wifiManager.setWifiEnabled(true);
-        onView(withId(R.id.buscar))
-                .perform(SearchViewActionExtension.Companion.submitText(stringInvalid));
-        Thread.sleep(middleTime);
-
-        onView(withId((R.id.layoutSinDatos)))
-                .check(matches(isDisplayed()));
-    }
 
     @Test
-    public void findProductNoConnection() throws InterruptedException {
+    public void findProductNoConnection(){
         wifiManager.setWifiEnabled(false);
+        onView(withId(R.id.rv_resultados_busqueda))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        onView(withId(R.id.buscar))
-                .perform(SearchViewActionExtension.Companion.submitText(stringValid));
-        Thread.sleep(middleTime);
         onView(withId((R.id.layoutErrorConeccion)))
                 .check(matches(isDisplayed()));
         wifiManager.setWifiEnabled(true);
     }
 
     @Test
-    public void testLoading()throws InterruptedException{
-        onView(withId(R.id.buscar))
-                .perform(SearchViewActionExtension.Companion.submitText(stringValid));
-        Thread.sleep(shortTime);
+    public void testLoading(){
+        onView(withId(R.id.rv_resultados_busqueda))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId((R.id.carga_resultados)))
                 .check(matches(isDisplayed()));
     }
@@ -111,14 +110,14 @@ public class BusquedaProductoTest {
     @Test
     public void retryButton()throws InterruptedException{
         wifiManager.setWifiEnabled(false);
-        onView(withId(R.id.buscar))
-                .perform(SearchViewActionExtension.Companion.submitText(stringValid));
+        onView(withId(R.id.rv_resultados_busqueda))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         wifiManager.setWifiEnabled(true);
         Thread.sleep(longTime);
         onView(withId(R.id.botonReintentar))
                 .perform(click());
-        Thread.sleep(middleTime);
-        onView(withId((R.id.rv_resultados_busqueda)))
+        Thread.sleep(longTime);
+        onView(withId((R.id.layoutConData)))
                 .check(matches(isDisplayed()));
     }
 }
