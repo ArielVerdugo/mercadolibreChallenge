@@ -46,7 +46,6 @@ public class ProductosActivity extends AppCompatActivity implements OnItemClickL
     private ProgressBar progressBar;
     private Button retryButton;
 
-    private ProductosResponse productosResponse;
     private ProductoContract.Presenter productPresenter;
 
 

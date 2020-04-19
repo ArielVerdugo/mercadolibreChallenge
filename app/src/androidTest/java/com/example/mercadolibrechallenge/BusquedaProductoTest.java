@@ -7,18 +7,31 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.mercadolibrechallenge.model.Producto;
+import com.example.mercadolibrechallenge.model.ProductosResponse;
 import com.example.mercadolibrechallenge.modules.activity.BusquedaActivity;
+import com.example.mercadolibrechallenge.modules.activity.ProductosActivity;
+import com.example.mercadolibrechallenge.modules.base.GetBaseCallback;
+import com.example.mercadolibrechallenge.modules.contract.ProductoContract;
+import com.example.mercadolibrechallenge.modules.presenter.ProductoPresenter;
+import com.example.mercadolibrechallenge.service.busqueda.BusquedaModel;
+import com.example.mercadolibrechallenge.service.busqueda.BusquedaServiceImplementation;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.mockito.Mockito.doReturn;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -31,11 +44,13 @@ public class BusquedaProductoTest {
     @Rule
     public ActivityTestRule<BusquedaActivity> activityRule = new ActivityTestRule<>(BusquedaActivity.class);
 
+
     BusquedaActivity pActivity;
     Integer longTime;
     Integer middleTime;
     Integer shortTime;
     WifiManager wifiManager;
+
 
     @Before
     public void initValidString() {
@@ -61,6 +76,7 @@ public class BusquedaProductoTest {
         middleTime = 5000;
         shortTime = 1000;
         longTime = 13000;
+
     }
 
 
@@ -87,12 +103,11 @@ public class BusquedaProductoTest {
     }
 
     @Test
-    public void findProductNoConnection() throws InterruptedException {
+    public void findProductNoConnection(){
         wifiManager.setWifiEnabled(false);
 
         onView(withId(R.id.buscar))
                 .perform(SearchViewActionExtension.Companion.submitText(stringValid));
-        Thread.sleep(middleTime);
         onView(withId((R.id.layoutErrorConeccion)))
                 .check(matches(isDisplayed()));
         wifiManager.setWifiEnabled(true);
@@ -121,6 +136,7 @@ public class BusquedaProductoTest {
         onView(withId((R.id.rv_resultados_busqueda)))
                 .check(matches(isDisplayed()));
     }
+
 }
 
 

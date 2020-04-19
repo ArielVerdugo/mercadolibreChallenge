@@ -9,7 +9,6 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.mercadolibrechallenge.modules.activity.BusquedaActivity;
-import com.example.mercadolibrechallenge.modules.activity.DetalleActivity;
 import com.example.mercadolibrechallenge.modules.activity.ProductosActivity;
 
 
@@ -36,6 +35,7 @@ public class DetalleProductoTest {
 
     @Rule
     public ActivityTestRule<ProductosActivity> activityRuleProducto = new ActivityTestRule<>(ProductosActivity.class);
+
 
     BusquedaActivity busquedaActivity;
     ProductosActivity productosActivity;
@@ -69,7 +69,6 @@ public class DetalleProductoTest {
 
     @Before
     public void initSearchProducto() throws InterruptedException{
-        wifiManager.setWifiEnabled(true);
         onView(withId(R.id.buscar))
                 .perform(SearchViewActionExtension.Companion.submitText(stringValid));
         Thread.sleep(longTime);
@@ -88,7 +87,7 @@ public class DetalleProductoTest {
 
 
     @Test
-    public void findProductNoConnection(){
+    public void selectProductNoConnection(){
         wifiManager.setWifiEnabled(false);
         onView(withId(R.id.rv_resultados_busqueda))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
@@ -120,6 +119,7 @@ public class DetalleProductoTest {
         onView(withId((R.id.layoutConData)))
                 .check(matches(isDisplayed()));
     }
+
 }
 
 
