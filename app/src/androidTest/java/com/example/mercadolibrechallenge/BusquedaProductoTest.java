@@ -85,7 +85,7 @@ public class BusquedaProductoTest {
         wifiManager.setWifiEnabled(true);
         onView(withId(R.id.buscar))
                 .perform(SearchViewActionExtension.Companion.submitText(stringValid));
-        Thread.sleep(middleTime);
+        Thread.sleep(longTime);
 
         onView(withId((R.id.rv_resultados_busqueda)))
                 .check(matches(isDisplayed()));
