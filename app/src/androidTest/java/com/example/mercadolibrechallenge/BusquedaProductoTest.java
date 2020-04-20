@@ -132,7 +132,7 @@ public class BusquedaProductoTest {
         Thread.sleep(longTime);
         onView(withId(R.id.botonReintentar))
                 .perform(click());
-        Thread.sleep(middleTime);
+        Thread.sleep(longTime);
         onView(withId((R.id.rv_resultados_busqueda)))
                 .check(matches(isDisplayed()));
     }
